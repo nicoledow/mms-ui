@@ -13,7 +13,6 @@ const getEstimate = data => {
             return response.json();
         })
         .then(data => {
-            debugger;
             dispatch({ type: 'QUOTE_GENERATED', quote: data.quote })
         })
         .catch(err => console.log('error in getEstimate', err));
