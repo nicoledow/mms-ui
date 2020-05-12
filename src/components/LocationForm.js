@@ -1,5 +1,5 @@
  import React from 'react';
- import SelectUSState from 'react-select-us-states';
+ import SelectUSState from './SelectUSState';
 
  export default class LocationForm extends React.Component {
     constructor() {
@@ -7,8 +7,18 @@
         this.state = {
             startingCity: '',
             destinationCity: '',
-            startingState: 'AL',
-            destinationState: 'AL'
+            startingState: '',
+            destinationState: ''
+        };
+    }
+
+    selectNH = () => {
+        const nhOption = document.querySelector('option[value=NH]');
+        if (!nhOption.selected) {
+            const alabamaOption = document.querySelector('option[value=AL');
+            alabamaOption.setAttribute('selected', false);
+
+            nhOption.setAttribute('selected', true);
         };
     }
 
@@ -35,7 +45,7 @@
             infoType: 'customer location'
         };
         this.props.updateStep();
-       this.props.saveData(data);
+        this.props.saveData(data);
     }
 
     render() {
