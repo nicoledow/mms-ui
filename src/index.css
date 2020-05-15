@@ -1,10 +1,6 @@
-/* font:
-font-family: 'Source Code Pro', monospace;
-*/
-
 * {
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
   box-sizing: inherit;
 }
 
@@ -20,30 +16,63 @@ body {
   box-sizing: border-box;
 }
 
+@keyframes moveInFromTop {
+  0%{
+    opacity: 0;
+    transform: translateY(-10rem);
+  }
+  100%{
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInFromBottom {
+  0%{
+    opacity: 0;
+    transform: translateY(10rem);
+  }
+  100%{
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .header, .header__logo {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 768px){
+
+  .header {
+    animation: moveInFromTop 2s ease-out;
+    position: relative;
+  }
+  
+  .header__logo {
+    height: 70vh;
+    width: 70vw;
+  }
+  
+  .header__p {
+    width: 75%;
+    text-align: center;
+    display: inline-block;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 1.5rem;
+    font-weight: 400;
+  
+    animation: moveInFromBottom 2s ease-out;
+  }
+
+}
+
 p {
   color: #fff;
 }
 
-.header {
-  animation: moveInFromTop 2s ease-out;
-  position: relative;
-}
-
-.header__logo {
-  height: 70vh;
-  width: 70vw;
-}
-
-.header__p {
-  width: 75%;
-  text-align: center;
-  display: inline-block;
-  font-family: 'Source Code Pro', monospace;
-  font-size: 1.5rem;
-  font-weight: 400;
-
-  animation: moveInFromBottom 2s ease-out;
-}
 
 .header__btn {
   display: block;
@@ -153,28 +182,4 @@ input[type=checkbox] {
   margin: 2rem;
   height: 2.25rem;
   width: 2.5rem;
-}
-
-
-
-@keyframes moveInFromTop {
-  0%{
-    opacity: 0;
-    transform: translateY(-10rem);
-  }
-  100%{
-    opacity: 1;
-    transform: translate(0);
-  }
-}
-
-@keyframes moveInFromBottom {
-  0%{
-    opacity: 0;
-    transform: translateY(10rem);
-  }
-  100%{
-    opacity: 1;
-    transform: translate(0);
-  }
 }
