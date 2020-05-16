@@ -1,5 +1,5 @@
  import React from 'react';
- import SelectUSState from './SelectUSState';
+ import SelectUSState from 'react-select-us-states';
 
  export default class LocationForm extends React.Component {
     constructor() {
