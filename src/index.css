@@ -39,26 +39,21 @@ body {
 }
 
 @media only screen and (max-width: 576px) {
+
   .header__logo {
     display: none;
-  }
-
-  .App {
-    padding-top: 40vh;
   }
 
   .header__p {
     font-size: 2rem;
     animation: moveInFromTop 2s ease-out;
+    margin: 25vw;
   }
 
   .header__btn {
     animation: moveInFromBottom 2s ease-out;
   }
 
-  .formDiv {
-    width: 98vw;
-  }
 }
 
 @media only screen and (min-width: 768px){
