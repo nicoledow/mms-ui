@@ -56,9 +56,15 @@ body {
     animation: moveInFromBottom 2s ease-out;
   }
 
+  .formDiv, .formDiv__form {
+    width: 90vw;
+    height: 82vh;
+  }
+
+
 }
 
-@media only screen and (min-width: 768px){
+@media only screen and (min-width: 577px){
 
   .header {
     animation: moveInFromTop 2s ease-out;
