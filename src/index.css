@@ -93,6 +93,10 @@ p {
   color: #fff;
 }
 
+.alert {
+  border: 2px solid red;
+}
+
 
 .header__btn {
   display: block;
