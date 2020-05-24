@@ -48,11 +48,11 @@
         })
         .then(resp => resp.json())
         .then(obj => {
-            debugger;
-            if (obj['result'] !== 'VALID'){
-                this.setState({ 'locationsAreValid': false });
-                this.alertInvalid();
-            } 
+            if (obj['result'] === 'VALID'){
+                return true;
+            } else {
+                return false;
+            }
         })
     }
 
@@ -71,6 +71,22 @@
     handleSubmit = e => {
         e.preventDefault();
 
+        // const data = {
+        //     startingCity: this.state.startingCity,
+        //     destinationCity: this.state.destinationCity,
+        //     startingState: this.state.startingState,
+        //     destinationState: this.state.destinationState,
+        //     infoType: 'customer location'
+        // };
+        // this.props.updateStep();
+        // this.fetchDistance(data);
+        // this.props.saveData(data);
+        this.validateLocationsAndSaveData();
+    }
+
+    validateLocationsAndSaveData = async () => {
+        this.setState({ locationsAreValid: true })
+
         const data = {
             startingCity: this.state.startingCity,
             destinationCity: this.state.destinationCity,
@@ -78,9 +94,17 @@
             destinationState: this.state.destinationState,
             infoType: 'customer location'
         };
-        this.props.updateStep();
-        this.fetchDistance(data);
-        this.props.saveData(data);
+
+        let locationsValidated = await this.fetchDistance(data);
+
+        // locationsAreValid ? this.props.saveData(data) : alert('Your starting or ending location is invalid. Please try again.');
+        if (locationsValidated) {
+            this.props.saveData(data);
+        } else {
+            alert('Your starting or ending location is invalid. Please try again.');
+            // this.setState({ locationsAreValid: false });
+            this.render();
+        }
     }
 
     render() {
