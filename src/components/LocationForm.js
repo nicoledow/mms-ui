@@ -10,20 +10,10 @@
             destinationCity: '',
             startingState: '',
             destinationState: '',
-            selectedState: 'New Hampshire',
             locationsAreValid: true
         };
     }
 
-    selectNH = () => {
-        const nhOption = document.querySelector('option[value=NH]');
-        if (!nhOption.selected) {
-            const alabamaOption = document.querySelector('option[value=AL');
-            alabamaOption.setAttribute('selected', false);
-
-            nhOption.setAttribute('selected', true);
-        };
-    }
 
     handleChange = e => {
         e.target.name === 'startingCity' ? this.setState({ startingCity: e.target.value }) : this.setState({ destinationCity: e.target.value })
@@ -56,31 +46,8 @@
         })
     }
 
-    alertInvalid = () => {
-        alert('Your starting or ending location is invalid. Please try again.');
-
-        document.querySelectorAll('input').forEach(ele => {
-            ele.className = 'alert';
-        })
-
-        document.querySelectorAll('select').forEach(ele => {
-            ele.className = 'alert';
-        })
-    }
-
     handleSubmit = e => {
         e.preventDefault();
-
-        // const data = {
-        //     startingCity: this.state.startingCity,
-        //     destinationCity: this.state.destinationCity,
-        //     startingState: this.state.startingState,
-        //     destinationState: this.state.destinationState,
-        //     infoType: 'customer location'
-        // };
-        // this.props.updateStep();
-        // this.fetchDistance(data);
-        // this.props.saveData(data);
         this.validateLocationsAndSaveData();
     }
 
@@ -97,7 +64,6 @@
 
         let locationsValidated = await this.fetchDistance(data);
 
-        // locationsAreValid ? this.props.saveData(data) : alert('Your starting or ending location is invalid. Please try again.');
         if (locationsValidated) {
             this.props.saveData(data);
         } else {
