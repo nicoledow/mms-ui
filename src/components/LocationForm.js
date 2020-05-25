@@ -1,6 +1,7 @@
  import React from 'react';
  import SelectUSState from 'react-select-us-states';
- import BASE_URL from '../index'
+ import fetchDistance from '../actions/fetchDistance';
+ import BASE_URL from '../index';
 
  export default class LocationForm extends React.Component {
     constructor() {
@@ -27,33 +28,9 @@
         this.setState({ destinationState: e });
     }
 
-    fetchDistance = data => {
-        const startingString = `${data['startingCity']}+${data['startingState']}`;
-        const destinationString = `${data['destinationCity']}+${data['destinationState']}`;
-
-        fetch(`${BASE_URL}distance`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-            body: JSON.stringify({ 'start': startingString, 'destination': destinationString })
-        })
-        .then(resp => resp.json())
-        .then(obj => {
-            if (obj['result'] === 'VALID'){
-                return true;
-            } else {
-                return false;
-            }
-        })
-    }
-
     handleSubmit = e => {
         e.preventDefault();
-        this.validateLocationsAndSaveData();
-    }
-
-    validateLocationsAndSaveData = async () => {
-        this.setState({ locationsAreValid: true })
-
+        
         const data = {
             startingCity: this.state.startingCity,
             destinationCity: this.state.destinationCity,
@@ -62,16 +39,30 @@
             infoType: 'customer location'
         };
 
-        let locationsValidated = await this.fetchDistance(data);
-
-        if (locationsValidated) {
-            this.props.saveData(data);
-        } else {
-            alert('Your starting or ending location is invalid. Please try again.');
-            // this.setState({ locationsAreValid: false });
-            this.render();
-        }
+        fetchDistance(data);
     }
+
+    // validateLocationsAndSaveData = async () => {
+    //     this.setState({ locationsAreValid: true })
+
+    //     const data = {
+    //         startingCity: this.state.startingCity,
+    //         destinationCity: this.state.destinationCity,
+    //         startingState: this.state.startingState,
+    //         destinationState: this.state.destinationState,
+    //         infoType: 'customer location'
+    //     };
+
+    //     let locationsValidated = await this.fetchDistance(data);
+
+    //     if (locationsValidated) {
+    //         this.props.saveData(data);
+    //     } else {
+    //         alert('Your starting or ending location is invalid. Please try again.');
+    //         // this.setState({ locationsAreValid: false });
+    //         this.render();
+    //     }
+    // }
 
     render() {
         return (
