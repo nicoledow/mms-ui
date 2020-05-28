@@ -42,6 +42,13 @@ body {
 
 @media only screen and (max-width: 576px) {
 
+  body {
+   animation: moveInFromBottom 3s ease-out;
+   background-image: url("./images/erda-estremera-sxNt9g77PE0-unsplash.jpg");
+   background-size: cover;
+   background-repeat: no-repeat;
+  }
+
   .header__logo {
     display: none;
   }
@@ -50,6 +57,7 @@ body {
     font-size: 2rem;
     animation: moveInFromTop 2s ease-out;
     margin: 25vw;
+    color: black;
   }
 
   .header__btn {
@@ -60,7 +68,6 @@ body {
     width: 90vw;
     height: 82vh;
   }
-
 
 }
 
