@@ -1,6 +1,6 @@
  import React from 'react';
  import SelectUSState from 'react-select-us-states';
- import validateLocations from '../actions/validateLocations';
+ import BASE_URL from '../index';
 
  export default class LocationForm extends React.Component {
     constructor() {
@@ -8,8 +8,8 @@
         this.state = {
             startingCity: '',
             destinationCity: '',
-            startingState: '',
-            destinationState: ''
+            startingState: 'AL',
+            destinationState: 'AL'
         };
     }
 
@@ -25,9 +25,20 @@
         this.setState({ destinationState: e });
     }
 
-    handleSubmit = async(e) => {
+    handleSubmit = e => {
         e.preventDefault();
         
+        function checkFieldsComplete() {
+            const cities = document.querySelectorAll('input[type=text]')
+            cities.forEach(input => {
+                if (input.value === '') {
+                    alert('All fields are required. Please try again.');
+                }
+            })
+        }
+
+        checkFieldsComplete();
+
         const data = {
             startingCity: this.state.startingCity,
             destinationCity: this.state.destinationCity,
@@ -36,13 +47,27 @@
             infoType: 'customer location'
         };
 
-        let locationsAreValid = await validateLocations(data);
-        if (locationsAreValid) {
-            this.props.updateStep();
-            this.props.saveData(data);
-        } else {
-            alert('Either your starting location or destination are invalid. Please check and try again.');
-        }
+        const startingString = `${data['startingCity']}+${data['startingState']}`;
+        const destinationString = `${data['destinationCity']}+${data['destinationState']}`;
+        
+        fetch(`${BASE_URL}distance`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+            body: JSON.stringify({ 'start': startingString, 'destination': destinationString })
+            })
+            .then(resp => resp.json())
+            .then(obj => {
+                if (obj['status'] === 'VALID'){
+                    this.props.updateStep();
+                    this.props.saveData(data);
+                } else {
+                    alert('One of your locations is invalid. Please check and try again.');
+                }
+            })
+            .catch(err => {
+                alert('An error occurred. Please try again.');
+            });
+ 
     }
 
 
