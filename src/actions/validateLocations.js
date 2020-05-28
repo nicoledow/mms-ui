@@ -1,6 +1,6 @@
 import BASE_URL from '../index';
 
-const fetchDistance = data => {
+const validateLocations = data => {
     const startingString = `${data['startingCity']}+${data['startingState']}`;
         const destinationString = `${data['destinationCity']}+${data['destinationState']}`;
 
@@ -19,4 +19,4 @@ const fetchDistance = data => {
         });
 }
 
-export default fetchDistance;
+export default validateLocations;

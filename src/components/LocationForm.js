@@ -1,7 +1,6 @@
  import React from 'react';
  import SelectUSState from 'react-select-us-states';
- import fetchDistance from '../actions/fetchDistance';
- import BASE_URL from '../index';
+ import validateLocations from '../actions/validateLocations';
 
  export default class LocationForm extends React.Component {
     constructor() {
@@ -10,11 +9,9 @@
             startingCity: '',
             destinationCity: '',
             startingState: '',
-            destinationState: '',
-            locationsAreValid: true
+            destinationState: ''
         };
     }
-
 
     handleChange = e => {
         e.target.name === 'startingCity' ? this.setState({ startingCity: e.target.value }) : this.setState({ destinationCity: e.target.value })
@@ -28,7 +25,7 @@
         this.setState({ destinationState: e });
     }
 
-    handleSubmit = e => {
+    handleSubmit = async(e) => {
         e.preventDefault();
         
         const data = {
@@ -39,30 +36,15 @@
             infoType: 'customer location'
         };
 
-        fetchDistance(data);
+        let locationsAreValid = await validateLocations(data);
+        if (locationsAreValid) {
+            this.props.updateStep();
+            this.props.saveData(data);
+        } else {
+            alert('Either your starting location or destination are invalid. Please check and try again.');
+        }
     }
 
-    // validateLocationsAndSaveData = async () => {
-    //     this.setState({ locationsAreValid: true })
-
-    //     const data = {
-    //         startingCity: this.state.startingCity,
-    //         destinationCity: this.state.destinationCity,
-    //         startingState: this.state.startingState,
-    //         destinationState: this.state.destinationState,
-    //         infoType: 'customer location'
-    //     };
-
-    //     let locationsValidated = await this.fetchDistance(data);
-
-    //     if (locationsValidated) {
-    //         this.props.saveData(data);
-    //     } else {
-    //         alert('Your starting or ending location is invalid. Please try again.');
-    //         // this.setState({ locationsAreValid: false });
-    //         this.render();
-    //     }
-    // }
 
     render() {
         return (
