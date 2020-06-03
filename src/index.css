@@ -44,10 +44,12 @@ body {
 
   body {
    animation: moveInFromBottom 3s ease-out;
-   background-image: url("./images/erda-estremera-sxNt9g77PE0-unsplash.jpg");
-   background-size: cover;
+   background-image: url("./images/MMS+Cube+White.png");
+   background-position: center top;
+   background-size: contain;
    background-repeat: no-repeat;
   }
+
 
   .header__logo {
     display: none;
@@ -55,9 +57,9 @@ body {
 
   .header__p {
     font-size: 2rem;
-    animation: moveInFromTop 2s ease-out;
-    margin: 25vw;
-    color: black;
+    animation: moveInFromBottom 2s ease-out;
+    margin-top: 74vh;
+    color: white;
   }
 
   .header__btn {
