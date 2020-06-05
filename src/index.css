@@ -44,21 +44,24 @@ body {
 
   body {
    animation: moveInFromBottom 3s ease-out;
-   background-image: url("./images/MMS+Cube+White.png");
-   background-position: center top;
-   background-size: contain;
-   background-repeat: no-repeat;
   }
 
 
-  .header__logo {
+  .header__logo--large {
     display: none;
+  }
+
+  .header__logo--small {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10vh;
+    height: 33vh;
   }
 
   .header__p {
     font-size: 2rem;
     animation: moveInFromBottom 2s ease-out;
-    margin-top: 74vh;
+    margin-top: 18vh;
     color: white;
   }
 
@@ -66,10 +69,16 @@ body {
     animation: moveInFromBottom 2s ease-out;
   }
 
-  .formDiv, .formDiv__form {
-    width: 90vw;
-    height: 82vh;
+  .formDiv__form {
+    display: block;
+    width: 100%;
+    
+    /* width: 100vw;
+    height: 100h; */
+    margin-left: auto;
+    margin-right: auto;
     background: black;
+    position: absolute;
   }
 
 }
@@ -80,8 +89,12 @@ body {
     animation: moveInFromTop 2s ease-out;
     position: relative;
   }
+
+  .header__logo--small {
+    display: none;
+  }
   
-  .header__logo {
+  .header__logo--large {
     height: 70vh;
     width: 70vw;
   }
