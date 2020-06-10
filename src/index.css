@@ -66,19 +66,15 @@ body {
     animation: moveInFromBottom 2s ease-out;
   }
 
-  .formDiv { /* root of problem with left/right scrolling */
+  .formDiv { 
     float: left;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 2rem;
+    padding: 2rem;
     overflow: hidden;
   }
 
-  /* .formDiv__form {
-    width: 100%;
-    margin: auto;
-  } */
 
 }
 
@@ -109,6 +105,16 @@ body {
     animation: moveInFromBottom 2s ease-out;
   }
 
+  .formDiv {
+    padding: 5 rem;
+    margin: 1rem 33vw;
+    border: 0.25rem solid white;
+    border-radius: 2rem;
+    position: relative;
+    margin-top: 2rem;
+    animation: moveInFromBottom 1s ease-out;
+  }
+
 }
 
 .App, #root {
@@ -124,7 +130,7 @@ p {
   display: block;
   position: relative;
   margin: 1.5rem auto;
-  padding: 0.75rem;
+  padding: 2rem;
   /* border-radius: 9rem; */
   text-transform: uppercase;
   font-family: 'Source Code Pro', monospace;
@@ -144,16 +150,6 @@ p {
 .header__btn:hover,
 .form__button:hover {
   transform: translateY(-0.2rem);
-}
-
-.formDiv {
-  padding: 5 rem;
-  margin: 1rem 33vw;
-  border: 0.25rem solid white;
-  border-radius: 2rem;
-  position: relative;
-
-  animation: moveInFromBottom 1s ease-out;
 }
 
 .formDiv__form--label {
