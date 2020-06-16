@@ -102,9 +102,9 @@ body {
     text-align: center;
     display: inline-block;
     font-family: 'Source Code Pro', monospace;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 400;
-    
+    color: white;
     animation: moveInFromBottom 2s ease-out;
   }
 
