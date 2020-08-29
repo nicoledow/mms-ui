@@ -29,12 +29,10 @@
         e.preventDefault();
         
         function checkFieldsComplete() {
-            const cities = document.querySelectorAll('input[type=text]')
-            cities.forEach(input => {
-                if (input.value === '') {
-                    alert('All fields are required. Please try again.');
-                }
-            })
+            const cities = [...document.querySelectorAll('input[type=text]')];
+            if (cities.find(input => input.value === '')) {
+                alert('Please complete all fields and try again.');
+            }
         }
 
         checkFieldsComplete();
