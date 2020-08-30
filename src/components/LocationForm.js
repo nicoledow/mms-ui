@@ -1,6 +1,8 @@
  import React from 'react';
  import SelectUSState from 'react-select-us-states';
  import BASE_URL from '../index';
+ import verifyLocations from '../actions/verifyLocations';
+import getEstimate from '../actions/getEstimate';
 
  export default class LocationForm extends React.Component {
     constructor() {
@@ -48,25 +50,15 @@
         const startingString = `${data['startingCity']}+${data['startingState']}`;
         const destinationString = `${data['destinationCity']}+${data['destinationState']}`;
         
-        fetch(`${BASE_URL}distance`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-            body: JSON.stringify({ 'start': startingString, 'destination': destinationString })
-            })
-            .then(resp => resp.json())
-            .then(obj => {
-                if (obj['status'] === 'VALID'){
-                    this.props.updateStep();
-                    this.props.saveData(data);
-                } else {
-                    alert('One of your locations is invalid. Please check and try again.');
-                }
-            })
-            .catch(err => {
-                alert('An error occurred. Please try again.');
-            });
- 
-    }
+        if(!verifyLocations(startingString, destinationString)) {
+            alert('One or more of your locations is invalid. Please check and try again.');
+            return;
+        } else {
+            this.props.updateStep();
+            this.props.saveData(data);
+        }
+    } 
+}
 
 
     render() {
